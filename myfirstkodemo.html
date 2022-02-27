@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns= http //www.w3.org/1999/xhtml>
+  <head>
+    <title>First KO demo</title>
+    <script src="knockout-3.5.1.js"></script>
+  </head>
+  <body>
+
+    First Name : <input type="text" name="firstName" data-bind="value:FirstName"/></br>
+    Last Name : <input type="text" name="lastName" data-bind="value:LastName"/>
+  </body>
+  <p>
+  Hello <span data-bind="text:FullName"></span>
+  </p>
+
+  <script>
+  
+  var nameViewModel = function(fName, lName) {
+    this.FirstName = ko.observable(fName);
+    this.LastName = ko.observable(lName);
+    this.FullName = ko.computed(function(){
+      return this.FirstName() +" " + this.LastName();
+    },this)
+  }
+  
+  ko.applyBindings(new nameViewModel("Prabhat", "Nayak"));
+  </script>
+  
+
+</html>
