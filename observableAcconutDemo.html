@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns= http //www.w3.org/1999/xhtml>
+  <head>
+    <title>account KO demo</title>
+    <script src="knockout-3.5.1.js"></script>
+  </head>
+  <body>
+
+<h2>Acconut Details</h2>
+ID : <span  data-bind="text:Id"></span><br/>
+Name : <span data-bind="text:Name"></span><br/>
+Balance : <span data-bind="text:Balance"></span>
+
+<hr/>
+
+New Balance : <input type="text" data-bind="value:Balance"/>
+<hr/>
+
+Account IDs:
+    <select data-bind="options:Accounts, optionsText:'Name', optionValue:'Id'"></select>
+    <hr/>
+
+  </body>
+
+
+  <script>
+//This is model part
+function Account(id, name, balance) {
+    this.Id = id;
+    this.Name = name;
+    this.Balance = balance;
+}
+
+//This is viewmodel part
+function AccountViewModel(acc) {
+    this.Id = acc.Id;
+    this.Name = acc.Name;
+    this.Balance = ko.observable(acc.Balance);
+
+    var a1 = new Account(1,"A1", 10000);
+    var a2 = new Account(2,"A2", 20000);
+    var a3 = new Account(3,"A3", 30000);
+
+    this.Accounts = [a1,a2,a3];
+    
+}
+var acc = new Account(1,"A1",10000);
+var accViewModel = new AccountViewModel(acc);
+
+ko.applyBindings(accViewModel);
+  </script>
+  
+
+</html>
